@@ -5,6 +5,10 @@ app = Flask(__name__)
 
 GEMINI_API_KEY = "AIzaSyCVa1JCtWY2jtaUIRuS9D4tvlb9K-nHC-s"
 
+@app.route("/")
+def home():
+    return "✅ Welcome to AI Pro Agent!"
+
 @app.route("/ask", methods=["POST"])
 def ask():
     data = request.get_json()
@@ -18,9 +22,7 @@ def ask():
                 "contents": [
                     {
                         "parts": [
-                            {
-                                "text": prompt
-                            }
+                            {"text": prompt}
                         ]
                     }
                 ]
@@ -29,7 +31,6 @@ def ask():
         result = response.json()
         reply = result["candidates"][0]["content"]["parts"][0]["text"]
         return jsonify({"reply": reply})
-
     except Exception as e:
         print("❌ Lỗi khi gọi Gemini:", e)
         return jsonify({"reply": "❌ Đã có lỗi khi gọi Gemini API."})
