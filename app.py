@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, render_template, request, jsonify
 import requests
 
 app = Flask(__name__)
@@ -7,7 +7,7 @@ GEMINI_API_KEY = "AIzaSyCVa1JCtWY2jtaUIRuS9D4tvlb9K-nHC-s"
 
 @app.route("/")
 def home():
-    return "✅ Welcome to AI Pro Agent!"
+    return render_template("chatai.html")
 
 @app.route("/ask", methods=["POST"])
 def ask():
